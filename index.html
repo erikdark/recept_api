@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Finder</title>
+</head>
+<body>
+    <h1>Recipe Finder</h1>
+    <form id="recipe-form">
+        <label for="ingredients">Enter ingredients (comma-separated):</label><br>
+        <input type="text" id="ingredients" name="ingredients" required>
+        <button type="submit">Find Recipes</button>
+    </form>
+    <div id="results"></div>
+    <script>
+        document.getElementById('recipe-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const ingredients = document.getElementById('ingredients').value;
+            fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=1&apiKey=YOUR_API_KEY`)
+                .then(response => response.json())
+                .then(data => {
+                    const results = document.getElementById('results');
+                    results.innerHTML = `
+                        <h2>Recipe: ${data[0].title}</h2>
+                        <img src="${data[0].image}" alt="${data[0].title}">
+                        <p><a href="https://spoonacular.com/recipes/${data[0].title}-${data[0].id}" target="_blank">View Full Recipe</a></p>
+                    `;
+                });
+        });
+    </script>
+</body>
+</html>
