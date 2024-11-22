@@ -17,7 +17,7 @@
         document.getElementById('recipe-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const ingredients = document.getElementById('ingredients').value;
-            fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=1&apiKey=3bb251df5f79473ba92490b99a9ec92e`)
+            fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=1&apiKey=73c4ae0cca6d49908b5244ba13902dd8`)
                 .then(response => response.json())
                 .then(data => {
                     const results = document.getElementById('results');
